@@ -1,0 +1,43 @@
+# 二进制文件
+backup-pro
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# 测试二进制文件
+*.test
+
+# 输出文件
+*.out
+
+# Go 工作空间文件
+go.work
+go.work.sum
+
+# 依赖目录
+vendor/
+
+# 配置文件（包含敏感信息）
+config.yaml
+
+# 日志文件
+*.log
+
+# 临时文件
+/tmp/
+*.tmp
+
+# IDE 文件
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+
+# 备份文件
+*.bak

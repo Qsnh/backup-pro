@@ -1,0 +1,55 @@
+# 备份配置
+backup:
+  source_dir: "/path/to/your/data"     # 要备份的目录
+  temp_dir: "./tmp"              # 临时目录（用于存放打包文件）
+  retention_count: 7                   # 保留最新的 7 个备份
+  name_prefix: "backup"                # 备份文件名前缀
+
+# S3 配置
+s3:
+  endpoint: ""                         # 自定义端点（可选，用于 MinIO 等兼容 S3 的服务）
+  region: "us-east-1"                  # AWS 区域
+  bucket: "my-backup-bucket"           # S3 桶名
+  access_key_id: "YOUR_ACCESS_KEY"     # AWS 访问密钥 ID
+  secret_access_key: "YOUR_SECRET_KEY" # AWS 访问密钥
+  prefix: "backups/"                   # S3 对象前缀（路径）
+  use_path_style: false                # 是否使用路径样式（MinIO 通常需要设为 true）
+
+# 定时任务配置
+schedule:
+  enabled: true                        # 是否启用定时任务
+  cron_expr: "0 0 2 * * *"            # Cron 表达式（每天凌晨 2 点执行）
+                                       # 格式：秒 分 时 日 月 星期
+                                       # 示例：
+                                       # "0 0 2 * * *"      - 每天凌晨 2:00
+                                       # "0 0 */6 * * *"    - 每 6 小时
+                                       # "0 30 1 * * 0"     - 每周日凌晨 1:30
+  run_at_start: false                  # 启动时是否立即执行一次
+
+# 通知配置
+notification:
+  enabled: true                        # 是否启用通知
+
+  # 邮件通知
+  email:
+    enabled: false                     # 是否启用邮件通知
+    smtp_host: "smtp.example.com"      # SMTP 服务器
+    smtp_port: 587                     # SMTP 端口
+    username: "your-email@example.com" # 用户名
+    password: "your-password"          # 密码
+    from: "backup@example.com"         # 发件人
+    to:                                # 收件人列表
+      - "admin@example.com"
+      - "ops@example.com"
+
+  # Webhook 通知
+  webhook:
+    enabled: false                     # 是否启用 Webhook 通知
+    url: "https://your-webhook-url.com/notify" # Webhook URL
+    method: "POST"                     # HTTP 方法（POST 或 GET）
+
+# 日志配置
+logging:
+  level: "info"                        # 日志级别：debug, info, warn, error
+  output: "stdout"                     # 输出方式：stdout 或 file
+  file: "app.log"  # 日志文件路径（当 output 为 file 时）
