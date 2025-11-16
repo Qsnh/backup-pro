@@ -41,7 +41,7 @@ func NewS3Uploader(s3Cfg cfg.S3Config) (*S3Uploader, error) {
 			func(service, region string, options ...interface{}) (aws.Endpoint, error) {
 				return aws.Endpoint{
 					URL:               s3Cfg.Endpoint,
-					HostnameImmutable: true,
+					HostnameImmutable: s3Cfg.UsePathStyle,
 				}, nil
 			})
 
