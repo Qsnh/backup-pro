@@ -1,5 +1,7 @@
+/bin/
+
 # 二进制文件
-backup-pro
+./backup-pro
 *.exe
 *.exe~
 *.dll
