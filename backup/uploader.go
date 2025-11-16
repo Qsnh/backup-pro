@@ -73,6 +73,8 @@ func NewS3Uploader(s3Cfg cfg.S3Config) (*S3Uploader, error) {
 	// 创建 S3 客户端
 	client := s3.NewFromConfig(awsCfg, func(o *s3.Options) {
 		o.UsePathStyle = s3Cfg.UsePathStyle
+		// 禁用自动 flexible checksums，避免 Aliyun OSS 不兼容 aws-chunked 编码
+		o.RequestChecksumCalculation = aws.RequestChecksumCalculationWhenRequired
 	})
 
 	log.Infof("S3 客户端初始化成功: bucket=%s, region=%s", s3Cfg.Bucket, s3Cfg.Region)
